@@ -12,267 +12,231 @@ class FilmotecaApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Filmoteca',
-      theme: ThemeData(
-        brightness: Brightness.dark,
-        scaffoldBackgroundColor: const Color(0xFF101018),
-        useMaterial3: true,
-      ),
-      home: const InicioPage(),
+      title: 'FILMOTECA',
+      theme: ThemeData.dark(),
+      home: const HomeScreen(),
     );
   }
 }
 
-class InicioPage extends StatelessWidget {
-  const InicioPage({super.key});
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
 
   final List<Map<String, dynamic>> peliculas = const [
-    {'titulo': 'El Padrino', 'icono': Icons.movie, 'color': Color(0xFF713B32)},
-    {'titulo': 'Interstellar', 'icono': Icons.rocket_launch, 'color': Color(0xFF254A70)},
-    {'titulo': 'Parásitos', 'icono': Icons.masks, 'color': Color(0xFF45634D)},
-    {'titulo': 'Toy Story', 'icono': Icons.toys, 'color': Color(0xFF966A31)},
+    {'titulo': 'El Padrino', 'icono': Icons.movie},
+    {'titulo': 'Interstellar', 'icono': Icons.rocket_launch},
+    {'titulo': 'Parásitos', 'icono': Icons.theater_comedy},
+    {'titulo': 'Toy Story', 'icono': Icons.toys},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF101010),
       body: SafeArea(
-        child: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(18),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Imagen de fondo y bienvenida
+              SizedBox(
+                height: 260,
+                width: double.infinity,
+                child: Stack(
+                  fit: StackFit.expand,
                   children: [
-                    // ENCABEZADO
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'FILMOTECA',
-                          style: TextStyle(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 2,
-                            color: Color(0xFFE7B75B),
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.help_outline),
-                        ),
-                      ],
+                    Image.asset(
+                      'images/fondo.jpg',
+                      fit: BoxFit.cover,
                     ),
-
-                    const SizedBox(height: 18),
-
-                    // BUSCADOR
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFF252531),
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: const Row(
+                      color: Colors.black.withValues(alpha: 0.60),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.all(24),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Icon(Icons.search, color: Colors.white70),
-                          SizedBox(width: 12),
-                          Expanded(
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: 'Buscar películas...',
-                                border: InputBorder.none,
-                              ),
+                          Text(
+                            'FILMOTECA',
+                            style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFFFFC857),
+                              letterSpacing: 3,
+                            ),
+                          ),
+                          SizedBox(height: 15),
+                          Text(
+                            '¡Bienvenido a FILMOTECA!',
+                            style: TextStyle(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            'Descubre películas y disfruta del cine.',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.white70,
                             ),
                           ),
                         ],
                       ),
                     ),
+                  ],
+                ),
+              ),
 
-                    const SizedBox(height: 25),
+              // Buscador
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Buscar películas...',
+                    prefixIcon: const Icon(Icons.search),
+                    filled: true,
+                    fillColor: Colors.white12,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+              ),
 
-                    // PELÍCULA DESTACADA
-                    const Text(
-                      'PELÍCULA DESTACADA',
+              // Película destacada
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  'PELÍCULA DESTACADA',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFFFC857),
+                  ),
+                ),
+              ),
+
+              Container(
+                margin: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF292929),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Icon(
+                      Icons.movie_creation,
+                      size: 45,
+                      color: Color(0xFFFFC857),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'DUNE: PARTE DOS',
                       style: TextStyle(
-                        color: Color(0xFFE7B75B),
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
-                        fontSize: 15,
-                        letterSpacing: 1,
                       ),
                     ),
-
-                    const SizedBox(height: 12),
-
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(18),
-                      child: SizedBox(
-                        height: 210,
-                        width: double.infinity,
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            Container(
-                              decoration: const BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFF182A43),
-                                    Color(0xFF65452D),
-                                    Color(0xFF171721),
-                                  ],
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                ),
-                              ),
-                            ),
-                            const Positioned(
-                              right: 25,
-                              top: 30,
-                              child: Icon(
-                                Icons.landscape,
-                                size: 110,
-                                color: Colors.white24,
-                              ),
-                            ),
-                            Positioned(
-                              left: 18,
-                              bottom: 18,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'DUNE: PARTE DOS',
-                                    style: TextStyle(
-                                      fontSize: 23,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const Text(
-                                    'Una aventura más allá del desierto',
-                                    style: TextStyle(color: Colors.white70),
-                                  ),
-                                  const SizedBox(height: 10),
-                                  ElevatedButton.icon(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.play_arrow),
-                                    label: const Text('Ver ahora'),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color(0xFFE7B75B),
-                                      foregroundColor: Colors.black,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: 28),
-
-                    // CATÁLOGO DE PELÍCULAS
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Películas populares',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text('Ver todas'),
-                        ),
-                      ],
-                    ),
-
-                    const SizedBox(height: 12),
-
-                    GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: peliculas.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 14,
-                        mainAxisSpacing: 14,
-                        childAspectRatio: 0.95,
-                      ),
-                      itemBuilder: (context, index) {
-                        final pelicula = peliculas[index];
-
-                        return Container(
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF252531),
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: pelicula['color'],
-                                    borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(15),
-                                    ),
-                                  ),
-                                  child: Icon(
-                                    pelicula['icono'],
-                                    size: 55,
-                                    color: Colors.white70,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(12),
-                                child: Text(
-                                  pelicula['titulo'],
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
+                    SizedBox(height: 5),
+                    Text(
+                      'Una aventura cinematográfica que no te puedes perder.',
+                      style: TextStyle(color: Colors.white70),
                     ),
                   ],
                 ),
               ),
-            ),
 
-            // MENÚ INFERIOR
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              decoration: const BoxDecoration(
-                color: Color(0xFF20202B),
-                border: Border(
-                  top: BorderSide(color: Colors.white12),
+              // Películas populares
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  'PELÍCULAS POPULARES',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFFFFC857),
+                  ),
                 ),
               ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _MenuItem(icono: Icons.home, texto: 'Inicio', activo: true),
-                  _MenuItem(icono: Icons.search, texto: 'Buscar'),
-                  _MenuItem(icono: Icons.favorite, texto: 'Favoritos'),
-                  _MenuItem(icono: Icons.person, texto: 'Perfil'),
-                ],
+
+              Padding(
+                padding: const EdgeInsets.all(15),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: peliculas.length,
+                  gridDelegate:
+                      const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                    childAspectRatio: 1.5,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF292929),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            peliculas[index]['icono'],
+                            size: 35,
+                            color: const Color(0xFFFFC857),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            peliculas[index]['titulo'],
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+      ),
+
+      // Menú inferior
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: const Color(0xFF1C1C1C),
+        selectedItemColor: const Color(0xFFFFC857),
+        unselectedItemColor: Colors.white54,
+        currentIndex: 0,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Inicio',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.favorite),
+            label: 'Favoritos',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Perfil',
+          ),
+        ],
       ),
     );
   }
 }
+
 
 class _MenuItem extends StatelessWidget {
   final IconData icono;
@@ -287,19 +251,24 @@ class _MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = activo
+        ? const Color(0xFFE7B75B)
+        : Colors.white60;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Icon(
           icono,
-          color: activo ? const Color(0xFFE7B75B) : Colors.white60,
+          color: color,
+          size: 25,
         ),
-        const SizedBox(height: 4),
+        const SizedBox(height: 5),
         Text(
           texto,
           style: TextStyle(
+            color: color,
             fontSize: 12,
-            color: activo ? const Color(0xFFE7B75B) : Colors.white60,
           ),
         ),
       ],
